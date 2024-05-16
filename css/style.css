@@ -1,0 +1,112 @@
+/* styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #2e3b4e;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #d9e0e6;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+}
+
+th {
+    background-color: #00796b;
+    color: #ffffff;
+}
+
+td:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+td:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+td a {
+    text-decoration: none;
+    color: #007bff;
+    margin: 0 5px;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-image: linear-gradient(to right, #00796b, #004d40);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+    background-image: linear-gradient(to right, #004d40, #00796b);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+form label {
+    margin-bottom: 5px;
+    color: #2e3b4e;
+}
+
+form input, form select, form button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #d9e0e6;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+form input:focus, form select:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+}
+
+form button {
+    background-image: linear-gradient(to right, #00796b, #004d40);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+form button:hover {
+    background-image: linear-gradient(to right, #004d40, #00796b);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
