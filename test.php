@@ -8,13 +8,11 @@ $connectionOptions = array(
     "Encrypt" => false
 );
 
-// Tạo kết nối
 $conn = sqlsrv_connect($serverName, $connectionOptions);
 if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-// Xử lý yêu cầu tìm kiếm
 $searchName = isset($_GET['name']) ? $_GET['name'] : '';
 $queryResults = [];
 
@@ -32,7 +30,6 @@ if ($searchName !== '') {
     }
 }
 
-// Đóng kết nối
 sqlsrv_close($conn);
 ?>
 

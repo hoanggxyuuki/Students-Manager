@@ -1,25 +1,21 @@
 <?php
 include 'config.php';
 
-// Lấy giá trị từ biểu mẫu tìm kiếm
 $searchNameOrID = isset($_GET['search_name_or_id']) ? $_GET['search_name_or_id'] : '';
 $searchFaculty = isset($_GET['search_faculty']) ? $_GET['search_faculty'] : '';
 $searchMajor = isset($_GET['search_major']) ? $_GET['search_major'] : '';
 $searchCourse = isset($_GET['search_course']) ? $_GET['search_course'] : '';
 $advancedSearch = isset($_GET['advanced_search']) ? $_GET['advanced_search'] : false;
 
-// Tạo điều kiện tìm kiếm
 $whereConditions = [];
 $params = [];
 
-// Điều kiện tìm kiếm đơn giản
 if (!empty($searchNameOrID)) {
     $whereConditions[] = "(SV.MaSV LIKE ? OR SV.HoTen LIKE ?)";
     $params[] = '%' . $searchNameOrID . '%';
     $params[] = '%' . $searchNameOrID . '%';
 }
 
-// Điều kiện tìm kiếm nâng cao
 if ($advancedSearch) {
     if (!empty($searchFaculty)) {
         $whereConditions[] = "K.MaKhoa = ?";
@@ -37,13 +33,11 @@ if ($advancedSearch) {
     }
 }
 
-// Tạo chuỗi WHERE từ các điều kiện
 $whereSql = '';
 if (count($whereConditions) > 0) {
     $whereSql = ' WHERE ' . implode(' AND ', $whereConditions);
 }
 
-// Câu lệnh truy vấn với điều kiện tìm kiếm
 $sql = "SELECT SV.MaSV, SV.HoTen, CONVERT(varchar, SV.NgaySinh, 23) as NgaySinh, SV.DiaChi, K.TenKhoa, NG.TenNganh, KH.TenKhoaHoc
         FROM SinhVien SV
         JOIN Khoa K ON SV.MaKhoa = K.MaKhoa
@@ -57,7 +51,6 @@ if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-// Lấy danh sách Khoa, Ngành và Khóa học để tạo biểu mẫu tìm kiếm
 $sql_faculty = "SELECT MaKhoa, TenKhoa FROM Khoa";
 $result_faculty = sqlsrv_query($conn, $sql_faculty);
 
@@ -87,7 +80,6 @@ $result_course = sqlsrv_query($conn, $sql_course);
     
         <h1 class="text-4xl font-bold mb-6 text-center text-green-700">Quản lý Sinh Viên</h1>
 
-        <!-- Biểu mẫu tìm kiếm đơn giản -->
         <form method="GET" action="index.php" class="flex items-center justify-between mb-6">
             <div class="flex flex-col w-2/3">
                 <label for="search_name_or_id" class="text-sm font-semibold mb-2 text-gray-600">Tên hoặc Mã Sinh Viên</label>
@@ -101,7 +93,6 @@ $result_course = sqlsrv_query($conn, $sql_course);
             <a href="add_student.php" class="ml-2 bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md shadow-lg">Thêm Sinh Viên Mới</a>
         </form>
 
-        <!-- Biểu mẫu tìm kiếm nâng cao -->
         <form method="GET" action="index.php" class="advanced-search p-6 bg-gray-50 rounded-lg shadow-inner mb-6">
             <input type="hidden" name="search_name_or_id" value="<?php echo $searchNameOrID; ?>">
             <input type="hidden" name="advanced_search" value="1">

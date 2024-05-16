@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $major = $_POST['major'];
     $course = $_POST['course'];
 
-    // Sử dụng parameterized query để tránh SQL Injection
     $sql = "INSERT INTO SinhVien (HoTen, NgaySinh, DiaChi, MaKhoa, MaNganh, MaKhoaHoc)
             VALUES (?, ?, ?, ?, ?, ?)";
     $params = array($name, $dob, $address, $faculty, $major, $course);
@@ -25,15 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Lấy danh sách Khoa
 $sql_faculty = "SELECT MaKhoa, TenKhoa FROM Khoa";
 $result_faculty = sqlsrv_query($conn, $sql_faculty);
 
-// Lấy danh sách Ngành
 $sql_major = "SELECT MaNganh, TenNganh FROM Nganh";
 $result_major = sqlsrv_query($conn, $sql_major);
 
-// Lấy danh sách Khóa học
 $sql_course = "SELECT MaKhoaHoc, TenKhoaHoc FROM KhoaHoc";
 $result_course = sqlsrv_query($conn, $sql_course);
 ?>

@@ -1,11 +1,9 @@
 <?php
 include 'config.php';
 
-// Kiểm tra xem có nhận được `id` từ GET hay không
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Tạo truy vấn với parameterized query để lấy thông tin sinh viên
     $sql = "SELECT MaSV, HoTen, CONVERT(varchar, NgaySinh, 23) as NgaySinh, DiaChi, MaKhoa, MaNganh, MaKhoaHoc
             FROM SinhVien
             WHERE MaSV = ?";
@@ -14,7 +12,6 @@ if (isset($_GET['id'])) {
     $stmt = sqlsrv_query($conn, $sql, $params);
 
     if ($stmt === false || sqlsrv_has_rows($stmt) == 0) {
-        // Không tìm thấy sinh viên với `id` tương ứng
         header('Location: index.php');
         exit();
     }
@@ -31,7 +28,6 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Xử lý yêu cầu POST khi cập nhật sinh viên
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $dob = $_POST['dob'];
@@ -40,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $major = $_POST['major'];
     $course = $_POST['course'];
 
-    // Sử dụng parameterized query để cập nhật dữ liệu
     $sql = "UPDATE SinhVien
             SET HoTen = ?, NgaySinh = ?, DiaChi = ?, MaKhoa = ?, MaNganh = ?, MaKhoaHoc = ?
             WHERE MaSV = ?";
@@ -49,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = sqlsrv_query($conn, $sql, $params);
 
     if ($stmt) {
-        // Chuyển hướng về trang chủ sau khi cập nhật thành công
         header('Location: index.php');
         exit();
     } else {
@@ -58,15 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Lấy danh sách Khoa
 $sql_faculty = "SELECT MaKhoa, TenKhoa FROM Khoa";
 $result_faculty = sqlsrv_query($conn, $sql_faculty);
 
-// Lấy danh sách Ngành
 $sql_major = "SELECT MaNganh, TenNganh FROM Nganh";
 $result_major = sqlsrv_query($conn, $sql_major);
 
-// Lấy danh sách Khóa học
 $sql_course = "SELECT MaKhoaHoc, TenKhoaHoc FROM KhoaHoc";
 $result_course = sqlsrv_query($conn, $sql_course);
 ?>
