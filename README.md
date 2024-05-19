@@ -5,4 +5,4 @@ Mã nguồn dựa trên cơ sở dữ liệu sql server để quản lí sinh vi
 Picture Demo :
 ![image](https://github.com/hoanggxyuuki/Students-Manager/assets/145022510/b186022b-00ff-4baf-94da-4bcb2ad15d4d)
 <br>
-<a href="https://github.com/hoanggxyuuki/Students-Manager/blob/main/video/Video_demo.mkv">Xem video demo </a>
+<a href="https://github.com/hoanggxyuuki/Students-Manager/blob/main/video/video-demo.mp4">Xem video demo </a>
